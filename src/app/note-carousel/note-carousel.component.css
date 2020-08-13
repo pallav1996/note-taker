@@ -1,0 +1,31 @@
+.row{
+    align-content: center;
+    overflow: auto;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.card-text{
+    text-overflow: ellipsis;
+}
+
+.card-title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-text{
+    word-wrap: break-word;
+}
+
+.card{
+    border:medium solid black; 
+    border-radius: 5px;
+}
+
+.card-footer{
+    background-color: white;
+    /* border-top-width: medium;
+    border-color: black; */
+    border: none;
+}

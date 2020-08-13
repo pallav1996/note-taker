@@ -1,0 +1,31 @@
+<div class="container" style="margin-top: 2%;">
+    <div class="card-deck">
+       
+       <div class="card" *ngFor = "let note of note_list" 
+       [style.background-color] = "getBackgroundColor(note.color)" [style.color] = "getTextColor(note.color)">
+          <div class="card-body">
+            <h5 class="card-title">{{note.title}}</h5>
+            <hr [style.background-color] = "getTextColor(note.color)">
+            <p class="card-text">{{note.content}}</p>
+          </div>
+          <div class="card-footer" 
+          [style.background-color] = "getBackgroundColor(note.color)">
+            <button (click) = "delete_note(note)" class="btn float-right" [style.color] = "getTextColor(note.color)">
+              <i class="fa fa-trash"></i>
+            </button>
+            <button class="btn float-right" [style.color] = "getTextColor(note.color)">
+              <a routerLink = "/note-editor/{{note.id}}" [style.color] = "getTextColor(note.color)"> <i class="fa fa-edit"></i> </a>
+            </button>
+          </div>      
+       </div>   
+   </div>
+</div>
+
+<ng-template #elseBlock>
+  <br>
+  <h3 style="text-align: center; font-weight: bold;">
+    Nothing to see here
+  </h3>
+  <br> <br>
+</ng-template>
+

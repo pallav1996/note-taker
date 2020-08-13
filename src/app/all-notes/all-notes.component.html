@@ -1,0 +1,42 @@
+<div class="container" style="margin: auto;">
+  <input #searchBox id="search-box" class="form-control" type="text"
+  (input) = "filter(searchBox.value)" placeholder="Enter seach text"/>
+  <br>
+</div>
+
+<div class="band" *ngIf = "results_length; else elseBlock">    
+    <div class = "card" *ngFor = "let note of search_results" [style.background-color] = "getBackgroundColor(note.color)"
+    [style.color] = "getTextColor(note.color)">
+        <div class="card-body">
+            <h5 class="card-title">{{note.title}}</h5>
+            <hr [style.background-color]="getTextColor(note.color)">
+            <p class="card-text">{{note.content}}</p>
+        </div>
+        
+        <div class="card-footer" [style.background-color] = "getBackgroundColor(note.color)">
+          <button (click) = "delete_note(note); searchBox.value = ''" class="btn float-right"
+          title="Delete" [style.color] = "getTextColor(note.color)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="btn float-right" title="Edit">
+            <a routerLink = "/note-editor/{{note.id}}"  [style.color] = "getTextColor(note.color)"><i class="fa fa-edit"></i> </a>
+          </button>
+          <button class="btn float-left" (click) = "copyText(note.title, note.content)"
+          title="Copy to Clipboard" [style.color] = "getTextColor(note.color)">
+            <i class="fa fa-clipboard"></i>
+          </button>
+              <button class="btn float-left"  title="Duplicate">
+                <a routerLink = "/note-editor/copy/{{note.id}}" [style.color] = "getTextColor(note.color)">
+                  <i class="fa fa-copy"></i> 
+                </a>
+              </button>    
+        </div>
+   </div>
+</div>
+   
+<ng-template #elseBlock>
+  <h3 style="text-align: center; font-weight: bold;">
+    Nothing to see here
+  </h3>
+  <br>
+</ng-template>

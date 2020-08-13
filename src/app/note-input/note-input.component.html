@@ -1,0 +1,59 @@
+<form #noteForm = "ngForm" (ngSubmit)="onSubmit()">
+    <div class="card-deck" style = "margin-right: 20%; margin-top: 10px; margin-bottom: 0px;">    
+        <!--INPUT CARD-->
+        <div class="form-group" id="input-card" style="padding: 0px; margin:0px;">
+            <div class="card" style="width:25rem; border:medium solid; margin-top: 0px;" id="note">
+                <div class="row no-gutters">
+                    <div class="col md-10">
+                        <div class="card-body">
+                            <input #title type="text" class="card-title form-control"
+                            placeholder="Enter title here" id="titlebox"
+                            [(ngModel)] = "model.title" name="title" required />
+                            <hr>
+                            <textarea #content class = "form-control" rows="5" cols="40" 
+                            placeholder="Enter content here" id="contentbox"
+                            [(ngModel)] = "model.content" name="content" required></textarea>
+                            
+                            <br>
+                            <strong>Color: # </strong> 
+                            <input #color type="text" id = "colorbox"
+                            [(ngModel)] = "model.color" name="color" placeholder="Enter HexCode (6 digits)"
+                            pattern="^[a-fA-F0-9]{6}$"/>             
+                                
+                            <br>      
+                                <button class="btn btn-primary" [disabled]="!noteForm.form.valid" 
+                                style="margin-top: 5%;" 
+                                (click) = "addNote(); noteForm.reset();">
+                                Save
+                                </button>
+                                <button class="btn btn-danger" style="margin-top: 5%; margin-left: 5%" 
+                                (click) = "goBack()">
+                                Cancel
+                                </button>     
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+        <!-- PREVIEW CARD-->
+        <div class="card" 
+        style="width: 25em; border:medium solid black; margin-top:0px; margin-left: 5%; margin-right: 25%;" 
+        id="note" 
+        [style.background-color] = "getBackgroundColor(model.color)" [style.color] = "getTextColor(model.color)">
+            <div class="row no-gutters">
+                <div class="col md-10">
+                    <div class="card-body">
+                        <div class = "card-title" aria-placeholder="Title">
+                            {{model.title}}
+                        </div>
+                        <hr [style.background-color] = "getTextColor(model.color)">
+                        <div class = "card-text white-space-pre-line" aria-placeholder="Content">
+                            {{model.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</form>
